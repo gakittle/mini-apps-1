@@ -60,31 +60,46 @@ Board.prototype.checkGame = (turn) => {
   } else {
     var squares = Array.from(document.getElementsByClassName('box'));
     console.log(Array.isArray(squares), squares);
+    var rowLength = Math.pow(squares.length, 0.5);
 
     // check all rows
     var rowWin = false;
-    for (var i = 0; i < squares.length; i += 3) {
+    for (var i = 0; i < squares.length; i += rowLength) {
       var rowSum = 0
-      for (var j = 0; j < 3; j++) {
+      for (var j = 0; j < rowLength; j++) {
         if (squares[i + j].innerHTML === turn) {
           rowSum++;
         }
       }
-      if (rowSum === 3) {
+      if (rowSum === rowLength) {
         rowWin = true;
       }
     }
     if (rowWin) {
-      console.log('ttt is ttt: ', ttt);
       ttt.renderEnd(turn);
+    } else {
+
+      // check columns
+      var colWin = false;
+      for (var i = 0; i < rowLength; i++) {
+        var colSum = 0;
+        for (var j = 0; j < squares.length; j += 3) {
+          if (squares[i + j].innerHTML === turn) {
+            colSum++;
+            console.log(colSum);
+          }
+        }
+        if (colSum === rowLength) {
+          colWin = true;
+        }
+      }
+      if (colWin) {
+        ttt.renderEnd(turn);
+      } else {
+
+        // check diagonals
+      }
     }
-
-    // check columns
-    for (var i = 0; i < squares.length; i++) {
-
-    }
-
-    // check diagonals
   }
 
 };

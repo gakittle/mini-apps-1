@@ -2,14 +2,18 @@
 <html>
 
 <head>
-  <title>Tic-Tac-Toe Takedown!</title>
+  <title>TTT!</title>
 </head>
 
 <body>
+  <script src="app.js"></script>
   <h1>
-    Choose Wisely:
+    TTT
   </h1>
-  <div class="board">
+
+  <button class="btn" onClick="handleNewGame()">New Game!</button>
+
+  <div class="board" onClick="ttt.handleSquareClick.call(ttt,event)">
     <div class="row" style="display: flex; flex-direction: row">
       <div class="box"></div>
       <div class="box"></div>
@@ -26,6 +30,7 @@
       <div class="box"></div>
     </div>
   </div>
+
 
   <style>
     html,
@@ -48,9 +53,17 @@
       border: 1px solid black;
       height: 100%;
       width: 100%;
+      text-align: center;
+      line-height: 100px;
+      font-size: 450%;
+      font-family: sans-serif;
+    }
+
+    .btn {
+      display: inline-flex;
+      margin-bottom: 20px;
     }
   </style>
-  <script src="app.js"></script>
 </body>
 
 </html>

@@ -98,6 +98,14 @@ Board.prototype.checkGame = (turn) => {
       } else {
 
         // check diagonals
+        var majorDiagonal = [squares[0], squares[4], squares[8]];
+        var minorDiagonal = [squares[2], squares[4], squares[6]];
+
+        var diags1 = majorDiagonal.filter(x => x.innerHTML === turn);
+        var diags2 = minorDiagonal.filter(x => x.innerHTML === turn);
+        if (diags1.length === rowLength || diags2.length === rowLength) {
+          ttt.renderEnd(turn);
+        }
       }
     }
   }

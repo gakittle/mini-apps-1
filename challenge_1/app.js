@@ -29,6 +29,8 @@ Reset button
 var Board = function () {
   this.turn = 'X';
   this.game = 'go';
+  this.isTie = false;
+  this.isDone = false;
 };
 
 Board.prototype.takeTurn = (letter) => {
@@ -40,16 +42,56 @@ Board.prototype.takeTurn = (letter) => {
 }
 
 Board.prototype.handleSquareClick = (event) => {
-  // console.log(!!event.target.innerHTML);
+  if (ttt.isDone) {
+    return;
+  }
   var square = event.target;
   if (!square.innerHTML) {
     square.innerHTML = ttt.turn;
     console.log(ttt);
+    ttt.checkGame(ttt.turn);
     ttt.turn = ttt.takeTurn(ttt.turn);
   }
 };
 
-let ttt = new Board();
-var boundSquareClick = ttt.handleSquareClick.bind(ttt);
+Board.prototype.checkGame = (turn) => {
+  if (ttt.isTie) {
+    ttt.renderEnd();
+  } else {
+    var squares = Array.from(document.getElementsByClassName('box'));
+    console.log(Array.isArray(squares), squares);
 
-console.log('hello from the world');
+    // check all rows
+    var rowWin = false;
+    for (var i = 0; i < squares.length; i += 3) {
+      var rowSum = 0
+      for (var j = 0; j < 3; j++) {
+        if (squares[i + j].innerHTML === turn) {
+          rowSum++;
+        }
+      }
+      if (rowSum === 3) {
+        rowWin = true;
+      }
+    }
+    if (rowWin) {
+      console.log('ttt is ttt: ', ttt);
+      ttt.renderEnd(turn);
+    }
+
+    // check columns
+    for (var i = 0; i < squares.length; i++) {
+
+    }
+
+    // check diagonals
+  }
+
+};
+
+Board.prototype.renderEnd = (turn) => {
+  ttt.isDone = true;
+  console.log('Player ' + turn + ' wins!');
+};
+
+let ttt = new Board();

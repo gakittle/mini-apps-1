@@ -76,10 +76,11 @@ Board.prototype.checkGame = (turn) => {
       }
       if (rowSum === rowLength) {
         rowWin = true;
+        var winningRow = i;
       }
     }
     if (rowWin) {
-      ttt.renderEnd(turn);
+      ttt.renderEnd(turn, 'row', winningRow);
     } else {
 
       // check columns
@@ -93,10 +94,11 @@ Board.prototype.checkGame = (turn) => {
         }
         if (colSum === rowLength) {
           colWin = true;
+          var winningCol = i;
         }
       }
       if (colWin) {
-        ttt.renderEnd(turn);
+        ttt.renderEnd(turn, 'col', winningCol);
       } else {
 
         // check diagonals
@@ -114,12 +116,24 @@ Board.prototype.checkGame = (turn) => {
 
 };
 
-Board.prototype.renderEnd = (end) => {
+Board.prototype.renderEnd = (end, type, coor) => {
   ttt.isDone = true;
   if (end === 'tie') {
     document.getElementsByTagName('h3')[0].innerHTML = 'I guess we all lost this one.';
   } else {
     document.getElementsByTagName('h3')[0].innerHTML = 'Player ' + end + ' wins!';
+  }
+  if (type) {
+    var squares = Array.from(document.getElementsByClassName('box'));
+    if (type === 'row') {
+      for (var i = 0; i < 3; i++) {
+        squares[i + coor].style.color = 'red';
+      }
+    } else if (type === 'col') {
+      for (var i = 0; i < squares.length; i += 3) {
+        squares[i + coor].style.color = 'red';
+      }
+    }
   }
 };
 
@@ -127,6 +141,7 @@ Board.prototype.handleNewGame = () => {
   var squares = Array.from(document.getElementsByClassName('box'));
   squares.forEach((square) => {
     square.innerHTML = '';
+    square.style.color = 'black';
   });
   ttt.turn = 'X';
   ttt.isTie = false;

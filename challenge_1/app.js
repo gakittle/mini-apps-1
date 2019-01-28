@@ -31,6 +31,7 @@ var Board = function () {
   this.game = 'go';
   this.isTie = false;
   this.isDone = false;
+  this.turnsLeft = 9;
 };
 
 Board.prototype.takeTurn = (letter) => {
@@ -48,7 +49,10 @@ Board.prototype.handleSquareClick = (event) => {
   var square = event.target;
   if (!square.innerHTML) {
     square.innerHTML = ttt.turn;
-    console.log(ttt);
+    ttt.turnsLeft--;
+    if (!ttt.turnsLeft) {
+      ttt.isTie = true;
+    }
     ttt.checkGame(ttt.turn);
     ttt.turn = ttt.takeTurn(ttt.turn);
   }
@@ -56,10 +60,9 @@ Board.prototype.handleSquareClick = (event) => {
 
 Board.prototype.checkGame = (turn) => {
   if (ttt.isTie) {
-    ttt.renderEnd();
+    ttt.renderEnd('tie');
   } else {
     var squares = Array.from(document.getElementsByClassName('box'));
-    console.log(Array.isArray(squares), squares);
     var rowLength = Math.pow(squares.length, 0.5);
 
     // check all rows
@@ -86,7 +89,6 @@ Board.prototype.checkGame = (turn) => {
         for (var j = 0; j < squares.length; j += 3) {
           if (squares[i + j].innerHTML === turn) {
             colSum++;
-            console.log(colSum);
           }
         }
         if (colSum === rowLength) {
@@ -112,9 +114,25 @@ Board.prototype.checkGame = (turn) => {
 
 };
 
-Board.prototype.renderEnd = (turn) => {
+Board.prototype.renderEnd = (end) => {
   ttt.isDone = true;
-  console.log('Player ' + turn + ' wins!');
+  if (end === 'tie') {
+    document.getElementsByTagName('h3')[0].innerHTML = 'I guess we all lost this one.';
+  } else {
+    document.getElementsByTagName('h3')[0].innerHTML = 'Player ' + end + ' wins!';
+  }
+};
+
+Board.prototype.handleNewGame = () => {
+  var squares = Array.from(document.getElementsByClassName('box'));
+  squares.forEach((square) => {
+    square.innerHTML = '';
+  });
+  ttt.turn = 'X';
+  ttt.isTie = false;
+  ttt.isDone = false;
+  ttt.turnsLeft = 9;
+  document.getElementsByTagName('h3')[0].innerHTML = 'The saga continues...';
 };
 
 let ttt = new Board();

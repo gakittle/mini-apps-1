@@ -103,7 +103,7 @@ Board.prototype.renderEnd = (end, type, coor) => {
   } else {
     document.getElementsByTagName('h3')[0].innerHTML = ttt.players[end][0] + ' wins!';
     ttt.players[end][1]++;
-    document.getElementById(end + 'Score').innerHTML = ttt.players[end][1];
+    document.getElementById(end + 'Score').innerHTML = 'Wins: ' + ttt.players[end][1];
     // var oldWinCount = Number(document.getElementById(end + 'Score')[0]);
     // document.getElementById[0].innerHTML = oldWinCount + 1;
   }

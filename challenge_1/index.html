@@ -6,28 +6,38 @@
 </head>
 
 <body>
-  <script src="app.js"></script>
   <h1>
     TTT
   </h1>
 
-  <button class="btn" onClick="handleNewGame()">New Game!</button>
+  <h3>The saga continues...</h3>
 
-  <div class="board" onClick="ttt.handleSquareClick.call(ttt,event)">
-    <div class="row" style="display: flex; flex-direction: row">
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
+  <div class="score">
+    <div id="X"></div>
+    <div id="XScore">0</div>
+    <div id="O"></div>
+    <div id="OScore">0</div>
+  </div>
+
+  <script src="app.js"></script>
+
+  <button class=" btn " onClick="ttt.handleNewGame() ">New Game!</button>
+
+  <div class="board " onClick="ttt.handleSquareClick.call(ttt,event) ">
+    <div class="row " style="display: flex; flex-direction: row ">
+      <div class="box "></div>
+      <div class="box "></div>
+      <div class="box "></div>
     </div>
-    <div class="row" style="display: flex; flex-direction: row">
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
+    <div class="row " style="display: flex; flex-direction: row ">
+      <div class="box "></div>
+      <div class="box "></div>
+      <div class="box "></div>
     </div>
-    <div class="row" style="display: flex; flex-direction: row">
-      <div class="box"></div>
-      <div class="box"></div>
-      <div class="box"></div>
+    <div class="row " style="display: flex; flex-direction: row ">
+      <div class="box "></div>
+      <div class="box "></div>
+      <div class="box "></div>
     </div>
   </div>
 

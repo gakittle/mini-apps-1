@@ -32,6 +32,11 @@ var Board = function () {
   this.isTie = false;
   this.isDone = false;
   this.turnsLeft = 9;
+  this.players = {
+    X: ['', 0],
+    O: ['', 0],
+  };
+  this.winner = null;
 };
 
 Board.prototype.takeTurn = (letter) => {
@@ -123,7 +128,11 @@ Board.prototype.renderEnd = (end, type, coor) => {
   if (end === 'tie') {
     document.getElementsByTagName('h3')[0].innerHTML = 'I guess we all lost this one.';
   } else {
-    document.getElementsByTagName('h3')[0].innerHTML = 'Player ' + end + ' wins!';
+    document.getElementsByTagName('h3')[0].innerHTML = ttt.players[end][0] + ' wins!';
+    ttt.players[end][1]++;
+    document.getElementById(end + 'Score').innerHTML = ttt.players[end][1];
+    // var oldWinCount = Number(document.getElementById(end + 'Score')[0]);
+    // document.getElementById[0].innerHTML = oldWinCount + 1;
   }
   if (type) {
     var squares = Array.from(document.getElementsByClassName('box'));
@@ -155,11 +164,20 @@ Board.prototype.handleNewGame = () => {
     square.innerHTML = '';
     square.style.color = 'black';
   });
-  ttt.turn = 'X';
+  ttt.turn = ttt.winner || 'X';
   ttt.isTie = false;
   ttt.isDone = false;
   ttt.turnsLeft = 9;
+  ttt.winner = null;
   document.getElementsByTagName('h3')[0].innerHTML = 'The saga continues...';
 };
 
 let ttt = new Board();
+var playerX = prompt('Player X, enter your name:');
+var playerO = prompt('Player O, enter your name:');
+
+ttt.players.X[0] = playerX;
+ttt.players.O[0] = playerO;
+
+document.getElementById('X').innerHTML = 'X: ' + playerX;
+document.getElementById('O').innerHTML = 'O: ' + playerO;

@@ -24,6 +24,10 @@ Reset button
   Defaults each square state, render it
   Resets state of game
   Sets state of player's turn to X
+
+  Orange: FF9225
+  Dark Blue: 1A1B29
+  Light Blue: ADDFE9
 */
 
 var Board = function () {
@@ -162,7 +166,7 @@ Board.prototype.handleNewGame = () => {
   var squares = Array.from(document.getElementsByClassName('box'));
   squares.forEach((square) => {
     square.innerHTML = '';
-    square.style.color = 'black';
+    square.style.color = '#FF9225';
   });
   ttt.turn = ttt.winner || 'X';
   ttt.isTie = false;

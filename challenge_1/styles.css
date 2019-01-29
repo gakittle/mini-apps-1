@@ -44,6 +44,10 @@ h3 {
   font-family: sans-serif;
 }
 
+.box:hover {
+  background-color: #868AAD
+}
+
 .btn {
   width: 100px;
   margin: 20px auto;

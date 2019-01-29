@@ -107,8 +107,10 @@ Board.prototype.checkGame = (turn) => {
 
         var diags1 = majorDiagonal.filter(x => x.innerHTML === turn);
         var diags2 = minorDiagonal.filter(x => x.innerHTML === turn);
-        if (diags1.length === rowLength || diags2.length === rowLength) {
-          ttt.renderEnd(turn);
+        if (diags1.length === rowLength) {
+          ttt.renderEnd(turn, 'majorDiag');
+        } else if (diags2.length === rowLength) {
+          ttt.renderEnd(turn, 'minorDiag');
         }
       }
     }
@@ -133,6 +135,16 @@ Board.prototype.renderEnd = (end, type, coor) => {
       for (var i = 0; i < squares.length; i += 3) {
         squares[i + coor].style.color = 'red';
       }
+    } else if (type === 'majorDiag') {
+      var majorDiagonal = [squares[0], squares[4], squares[8]];
+      majorDiagonal.forEach((square) => {
+        square.style.color = 'red';
+      });
+    } else if (type === 'minorDiag') {
+      var minorDiagonal = [squares[2], squares[4], squares[6]];
+      minorDiagonal.forEach((square) => {
+        square.style.color = 'red';
+      });
     }
   }
 };

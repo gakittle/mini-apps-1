@@ -1,35 +1,3 @@
-/*
-CONCERNS TO SEPARATE:
-
-Model:
-State of player's turn (X or O, X always starts)
-State of game: ip, win, tie
-State of each square
-  On start up
-  On reset
-  On click
-
-Viewer:
-Render X's and O's
-Render game complete
-  win or tie
-
-Controller:
-click listener for each square in grid
-  IF SQUARE IS EMPTY:
-  Change state of square, render it
-  Triggers assessment of game state
-  Toggles state of player's turn
-Reset button
-  Defaults each square state, render it
-  Resets state of game
-  Sets state of player's turn to X
-
-  Orange: FF9225
-  Dark Blue: 1A1B29
-  Light Blue: ADDFE9
-*/
-
 var Board = function () {
   this.turn = 'X';
   this.game = 'go';
@@ -59,10 +27,11 @@ Board.prototype.handleSquareClick = (event) => {
   if (!square.innerHTML) {
     square.innerHTML = ttt.turn;
     ttt.turnsLeft--;
-    if (!ttt.turnsLeft) {
-      ttt.isTie = true;
-    }
     ttt.checkGame(ttt.turn);
+    if (!ttt.turnsLeft && !ttt.isDone) {
+      ttt.isTie = true;
+      ttt.renderEnd('tie');
+    }
     ttt.turn = ttt.takeTurn(ttt.turn);
   }
 };

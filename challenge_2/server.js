@@ -1,13 +1,27 @@
-var express = require('express');
+let express = require('express');
+let morgan = require('morgan');
+let parser = require('body-parser');
 const port = 8000;
 
-var app = express();
+let app = express();
 
-app.use(express.static(__dirname));
+app.use(express.static('./client/index.html'));
+app.use(morgan('dev'));
+app.use(parser.json());
+
 app.listen(port, err => {
   if (err) {
-    console.error('Error :', err);
-  } else {
-    console.log('Listening at Port:', port);
+    return console.error('Error :', err);
   }
+  console.log('Listening at Port:', port);
+});
+
+app.get('/', (req, res) => {
+  console.log('getting:', req.body);
+  res.sendFile(__dirname + '/client/index.html');
+});
+
+app.post('/', (req, res) => {
+  console.log('Incoming request:', req.body);
+  res.send('Posting...');
 });

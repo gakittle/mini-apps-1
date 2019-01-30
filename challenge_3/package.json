@@ -19,7 +19,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "pile": "babel client --watch --out-dir public --presets @babel/preset-react --ignore=node_modules,public --source-maps inline"
   },
   "keywords": [],
   "author": "",

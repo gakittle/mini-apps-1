@@ -7,7 +7,7 @@ var convertData = obj => {
     var keys = Object.keys(obj);
     var columns = [];
     var hasChildren = false;
-    keys.forEach((key, index) => {
+    keys.forEach(key => {
       if (key !== 'children') {
         columns.push(key);
       } else if (key === 'children') {
@@ -27,3 +27,5 @@ var convertData = obj => {
 
   return csv;
 };
+
+module.exports.convertData = convertData;

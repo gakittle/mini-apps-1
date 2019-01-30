@@ -7,10 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <form method="POST">
-      <textarea placeholder="Place data here..."></textarea>
-      <input type="submit" value="Submit" />
+    <h2 style="text-align: center">Object - CSV File Converter</h2>
+    <h4 style="text-align: center">
+      Drop your objects here for a free CSV download!
+    </h4>
+    <form method="POST" target="target" style="text-align: center; ">
+      <textarea
+        placeholder="Place data here..."
+        name="input"
+        style="display: block; margin-left: auto; margin-right: auto; width: 400px; height: 400px;"
+      ></textarea>
+      <div style="align-items: center">
+        <input type="submit" value="Submit" />
+      </div>
     </form>
-    <!-- <script src="app.js"></script> -->
+    <script src="app.js"></script>
   </body>
 </html>

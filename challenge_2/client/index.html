@@ -8,7 +8,7 @@
   </head>
   <body style="text-align: center">
     <h2>Object - CSV File Converter</h2>
-    <h4>Drop your object here for a free CSV download!</h4>
+    <h4>Copy your JSON object here for a FREE CSV download!</h4>
     <form method="POST" target="target">
       <textarea
         placeholder="Place data here..."
@@ -16,7 +16,14 @@
         style="display: block; margin-left: auto; margin-right: auto; width: 400px; height: 400px;"
       ></textarea>
       <div style="align-items: center">
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" style="cursor: pointer" />
+        <label
+          for="upload"
+          style="border: 1px solid gray; cursor: pointer; background-color: #eeeeee;"
+        >
+          <input type="file" style="display: none" id="upload" /> Or choose a
+          file!
+        </label>
       </div>
     </form>
     <script src="app.js"></script>

@@ -18,6 +18,9 @@ class App extends React.Component {
   }
 
   handleButtonClick(event) {
+    if (event) {
+      event.preventDefault();
+    }
     var pageIndex;
     var forms = this.state.pages;
     var page = this.state.page;

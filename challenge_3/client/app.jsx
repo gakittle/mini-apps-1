@@ -3,7 +3,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       page: 'home',
-      pages: ['home', 'f1', 'f2', 'f3'],
+      pages: ['home', 'f1', 'f2', 'f3', 'buy'],
       f1: ['Name', 'Email', 'Password'],
       f2: [
         'Address Line 1',
@@ -13,31 +13,24 @@ class App extends React.Component {
         'ZIP Code',
         'Phone #'
       ],
-      f3: [
-        'Credit Card #',
-        'Expiry Date',
-        'CVV',
-        'Billing Address 1',
-        'Billing Address 2',
-        'City',
-        'State',
-        'ZIP Code'
-      ]
+      f3: ['Credit Card #', 'Expiry Date', 'CVV', 'Billing ZIP Code']
     };
   }
 
   handleButtonClick(event) {
     var pageIndex;
     var forms = this.state.pages;
+    var page = this.state.page;
     for (var i = 0; i < forms.length; i++) {
-      if (this.state.page === forms[i]) {
+      if (page === forms[i]) {
         pageIndex = i + 1;
       }
     }
     var next = forms[pageIndex] || forms[0];
     this.setState({ page: next });
+
     forms.forEach(form => {
-      if (form !== this.state.page) {
+      if (form !== page) {
         document.getElementById(form).style.display = 'none';
       } else {
         document.getElementById(form).style.display = 'block';
@@ -66,6 +59,11 @@ class App extends React.Component {
 
         <F3
           fields={this.state.f3}
+          onClick={this.handleButtonClick.bind(this)}
+        />
+
+        <Buy
+          fields={this.state.f1.concat(this.state.f2).concat(this.state.f3)}
           onClick={this.handleButtonClick.bind(this)}
         />
       </div>
@@ -126,6 +124,20 @@ var F3 = props => {
       })}
       <button onClick={props.onClick} className="submit">
         Next!
+      </button>
+    </div>
+  );
+};
+
+var Buy = props => {
+  return (
+    <div id="buy">
+      Confirm your order below!!
+      {props.fields.map(field => {
+        return <Field title={field} />;
+      })}
+      <button onClick={props.onClick} className="submit">
+        Purchase
       </button>
     </div>
   );

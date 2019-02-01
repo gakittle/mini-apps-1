@@ -1,0 +1,22 @@
+html,
+body {
+  text-align: center;
+}
+
+.board {
+  display: inline-block;
+}
+
+.row {
+  background-color: yellow;
+}
+
+.square {
+  height: 65px;
+  width: 65px;
+  border: 1px solid black;
+  display: inline-block;
+  margin: 3px 3px;
+  border-radius: 50%;
+  background-color: white;
+}

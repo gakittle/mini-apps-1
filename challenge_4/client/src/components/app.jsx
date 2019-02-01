@@ -25,15 +25,16 @@ class App extends React.Component {
 
   // To retrieve square coordinates from string:
   // var nums = str.split(',').map(x => Number(x))
-  handleClick(event, id) {
+  handleClick(event) {
     event.preventDefault();
 
     // Don't allow further play if game is done
-    if (gameIsDone) {
+    if (this.state.gameIsDone) {
       return;
     }
 
     // Find which square should receive piece
+    var id = event.target.id;
     var coor = id.split(',').map(x => Number(x));
     var x = coor[0];
     var newBoard = this.state.board;
@@ -63,8 +64,8 @@ class App extends React.Component {
     // apply styling this.state.turn to target button
     var xy = [x, y];
     var coor = xy.toString();
-    var id = coor.replace(',', '\\\\,');
-    $('#' + id).css({ 'background-color': turn });
+    var id = coor.replace(',', '\\,');
+    $('#' + id).css({ 'background-color': turn.toLowerCase() });
   }
 
   renderTurn(turn) {
@@ -82,7 +83,7 @@ class App extends React.Component {
     return (
       <div>
         <Banner msg={this.state.msg} />
-        <Board size={this.state.size} />
+        <Board size={this.state.size} onClick={this.handleClick.bind(this)} />
       </div>
     );
   }

@@ -58,6 +58,7 @@ class App extends React.Component {
     // Update board to reflect game
     this.setState({ board: newBoard });
     this.renderPiece(x, targetY, this.state.turn);
+    this.renderTurn(this.state.turn);
   }
 
   renderPiece(x, y, turn) {
@@ -71,12 +72,12 @@ class App extends React.Component {
   renderTurn(turn) {
     // call win check function(s)
     if (turn === 'Red') {
-      this.setState({ turn: 'Yellow' });
-    } else {
+      this.setState({ turn: 'Blue' });
+      this.setState({ msg: `Blue, it's your turn!` });
+    } else if (turn === 'Blue') {
       this.setState({ turn: 'Red' });
+      this.setState({ msg: `Red, it's your turn!` });
     }
-
-    this.setState({ msg: `${this.state.turn}, it's your turn!` });
   }
 
   render() {
